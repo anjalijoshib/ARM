@@ -1,0 +1,14 @@
+     AREA     factorial, CODE, READONLY
+     EXPORT __main
+     ENTRY 
+__main  FUNCTION	
+              
+	          MOV r3 , #0x20000000 ; load memory address in r0
+	          LDRB r0, [r3,#0x01]  ; store number  in r0
+	          TST r0, #1 ; perform bitwise and operation (r0 value remains same)
+	          IT NE       ; check if zero flag is not set
+                  MOVNE r1,#1 ; if zero flag not set = value is odd so move 1 in r1
+		  MOVEQ r2,#1 ; if even move 1 in r2
+STOP    B STOP ; stop program
+     ENDFUNC
+     END 

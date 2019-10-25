@@ -1,0 +1,18 @@
+     AREA     first, CODE, READONLY
+     EXPORT __main
+     ENTRY 
+__main  FUNCTION	
+	     MOV r4, 0x20000000; load address in r0
+             LDRB r0 , [r4,#0x1] ;take input1 in r0
+	     LDRB r1 , [r4,#0x2] ;take input2 in r1  
+             LDRB r2 , [r4,#0x4] ;take input3 in r2    			  
+             CMP r0 , r1      ; Compare the two numbers in r0 and r1
+             IT HI            ; checking if ro > r1
+             MOVHI r1 , r0    ; if r0>r1 move higher value in r1 and if it is less then already existing value in r1 is higher
+	     CMP r1 , r2      ; Compare the two numbers in r1 and r2
+	     IT HI             ; checking if r1 > r2
+	     MOVHI r2 , r1     ; if r1 > r2 move high value ie r1 in r2 and if it is less already existing value in r2 is higher 
+	     MOV r3 , r2       ; store output in r3
+STOP    B STOP ; stop program
+     ENDFUNC
+     END 

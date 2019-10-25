@@ -1,0 +1,27 @@
+     AREA     fisrt, CODE, READONLY
+     EXPORT __main
+     ENTRY 
+__main  FUNCTION
+	      MOV r2, 0x20000000 ; load memory starting address in 0x20000000
+              LDRB r0 , [r2,#0x01]; load r0 with first input
+	      LDRB r1 , [r2,#0x02] ;load r1 with second input
+			  
+	      CMP r0,#0  ;if r0 = 0 then output is r1 because everything divides 0 
+	      IT EQ
+	      BEQ STOP   ; output is stored in r1
+			  
+	      CMP r1,#0 ; if r1 = 0 then output is r0 because everything divides 0
+	      IT EQ
+	      BEQ STOP  ; output is stored in r0
+			  
+LOOP	      CMP r0 , r1 ;compare r1 and r2
+              IT EQ       ; check if r1 = r2
+              BEQ STOP	   ; if r1 = r2 then brach to stop
+              ITE HI		; check if  r1 > r2	  
+	      SUBHI r0 , r0 , r1 ; if r1 > r2 , apply gcd(r1-r2) that is you loop again
+              SUBLS r1 , r1 , r0 ; if r1 < r2 , apply gcd(r2-r1) that is you loop again 
+			  ; note that ouput will get stored in both ro and r1 after computation
+              B LOOP	           
+STOP    B STOP ; stop program
+     ENDFUNC
+     END 
