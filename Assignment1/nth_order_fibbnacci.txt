@@ -5,7 +5,7 @@ __main  FUNCTION
               MOV r5, 0x20000000 ;load memory starting address in 20000000
 	      MOV r0 , #0    ;storing f(n-2) value which is for start is 0
 	      MOV r1 , #1    ;storing f(n-1) value which is for start is 1
-              LDRB r7 , [r0,#0x1]	 ;to give input load data from menory location 20000001
+              LDRB r7 , [r5,#0x1]	 ;to give input load data from menory location 20000001
               MOV r2 , r7	 ;output will be stored in R2 		  
               CMP r2 , #1     ; to check if order of fibonnaci is 1 or greater than 1
               IT LS         
